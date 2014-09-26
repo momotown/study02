@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>selenium</name>
-			<type>2</type>
-			<location>D:/Development/workspace/selenium</location>
-		</link>
-		<link>
-			<name>visualization-datasource</name>
-			<type>2</type>
-			<location>D:/Development/workspace/visualization-datasource</location>
-		</link>
-	</linkedResources>
 </projectDescription>
