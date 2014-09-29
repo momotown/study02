@@ -245,6 +245,7 @@ public class TeamBattingStatsParser {
 			try {
 				dataTable.addRow(row);
 			} catch (TypeMismatchException e) {
+				// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
 				e.printStackTrace();
 			}
 		}
