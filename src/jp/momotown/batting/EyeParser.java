@@ -3,8 +3,7 @@ package jp.momotown.batting;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.batting.SplitStatsDataTable;
-
+import jp.momotown.datasource.batting.EyeDataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,15 +11,14 @@ import com.google.visualization.datasource.base.TypeMismatchException;
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.TableRow;
 
-public class SplitStatsParser {
+public class EyeParser {
 
-	public SplitStatsParser() {
+	public EyeParser() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-
-	public SplitStatsDataTable parse(WebElement element) {
-		
-		SplitStatsDataTable dataTable = new SplitStatsDataTable();
+	
+	public EyeDataTable parse(WebElement element) {
+		EyeDataTable dataTable = new EyeDataTable();
 		
 		if(!IsValid(element)) {
 			return null;
@@ -48,25 +46,24 @@ public class SplitStatsParser {
 		}
 		
 		return dataTable;
-		
 	}
 
 	public boolean IsValid(WebElement element) {
-		
 		if(0 != element.getTagName().compareTo("table")) {
 			return false;
 		}
 		
 		List<WebElement> trs = element.findElements(By.cssSelector("tr"));
-		List<WebElement> ths = trs.get(0).findElements(By.cssSelector("th"));
-		
-		SplitStatsDataTable dataTable = new SplitStatsDataTable();
-		
+		List<WebElement> ths = trs.get(1).findElements(By.cssSelector("th"));
+		EyeDataTable dataTable = new EyeDataTable();
 		List<ColumnDescription> columnDescriptions= dataTable.getColumnDescriptions();
+
+		// 列数
 		if(ths.size() != columnDescriptions.size()) {
 			return false;
 		}
 		
+		// ヘッダ
 		for(int i = 0; i < ths.size(); ++i) {
 			String text =Pattern.compile("\n").matcher(ths.get(i).getText()).replaceAll("");
 			if(0 != text.compareTo(columnDescriptions.get(i).getLabel())) {
@@ -75,7 +72,6 @@ public class SplitStatsParser {
 		}
 	
 		return true;
-		
 	}
 
 }

@@ -2,9 +2,12 @@ package jp.momotown;
 
 import java.util.List;
 
+import jp.momotown.batting.EyeParser;
+import jp.momotown.batting.RISPParser;
 import jp.momotown.batting.SabermetricsParser;
 import jp.momotown.batting.SplitStatsParser;
-import jp.momotown.datasource.batting.PlayerBattingSplitStatsDataTable;
+import jp.momotown.datasource.batting.EyeDataTable;
+import jp.momotown.datasource.batting.RISPDataTable;
 import jp.momotown.datasource.batting.SabermetricsDataTable;
 import jp.momotown.datasource.batting.SplitStatsDataTable;
 import jp.momotown.datasource.batting.TeamBattingStatsDataTable;
@@ -15,7 +18,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.google.visualization.datasource.datatable.TableCell;
-import com.google.visualization.datasource.datatable.value.Value;
 
 public class BaseballDataJpParser {
 
@@ -57,24 +59,54 @@ public class BaseballDataJpParser {
 
 			webDriver.get(link);
 			
+			SplitStatsDataTable splitStatsDataTable = null;
+			SabermetricsDataTable sabermetricsDataTable = null;
+			EyeDataTable eyeDataTable = null;
+			RISPDataTable rispDataTable = null;
+			
 			WebElement  mainElement = webDriver.findElement(By.cssSelector("div#main"));
 			List<WebElement> tables = mainElement.findElements(By.cssSelector("table.table-02"));
 			for(WebElement table : tables) {
 				// Splits
-				SplitStatsParser splitStatsParser = new SplitStatsParser();
-				SplitStatsDataTable splitStatsDataTable = splitStatsParser.parse(table);
-				if(null != splitStatsDataTable) {
-					continue;
+				if(null == splitStatsDataTable) {
+					SplitStatsParser splitStatsParser = new SplitStatsParser();
+					splitStatsDataTable = splitStatsParser.parse(table);
+					if(null != splitStatsDataTable) {
+						System.out.println("Splitsを取得しました.");
+						continue;
+					}
 				}
 				
 				// セイバーメトリクス成績
-				SabermetricsParser sabermetricsParser = new SabermetricsParser();
-				SabermetricsDataTable sabermetricsDataTable = sabermetricsParser.parse(table);
-				if(null != sabermetricsDataTable) {
-					continue;
+				if(null == sabermetricsDataTable) {
+					SabermetricsParser sabermetricsParser = new SabermetricsParser();
+					sabermetricsDataTable = sabermetricsParser.parse(table);
+					if(null != sabermetricsDataTable) {
+						System.out.println("セイバーメトリクス成績を取得しました.");
+						continue;
+					}
 				}
+				
 				// 選球眼関連
+				if(null == eyeDataTable) {
+					EyeParser eyeParser = new EyeParser();
+					eyeDataTable = eyeParser.parse(table);
+					if(null != eyeDataTable) {
+						System.out.println("選球眼関連を取得しました.");
+						continue;
+					}
+				}
+				
 				// 得点圏成績
+				if(null == rispDataTable) {
+					RISPParser rispParser = new RISPParser();
+					rispDataTable = rispParser.parse(table);
+					if(null != rispDataTable) {
+						System.out.println("得点圏成績を取得しました.");
+						continue;
+					}
+				}
+
 				// 状況別成績マトリクス表
 				// 得点差状況別成績
 				// 左右投手成績

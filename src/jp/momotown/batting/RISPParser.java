@@ -3,8 +3,7 @@ package jp.momotown.batting;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.batting.SplitStatsDataTable;
-
+import jp.momotown.datasource.batting.RISPDataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,15 +11,15 @@ import com.google.visualization.datasource.base.TypeMismatchException;
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.TableRow;
 
-public class SplitStatsParser {
+public class RISPParser {
 
-	public SplitStatsParser() {
+	public RISPParser() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public SplitStatsDataTable parse(WebElement element) {
+	public RISPDataTable parse(WebElement element) {
 		
-		SplitStatsDataTable dataTable = new SplitStatsDataTable();
+		RISPDataTable dataTable = new RISPDataTable();
 		
 		if(!IsValid(element)) {
 			return null;
@@ -60,7 +59,7 @@ public class SplitStatsParser {
 		List<WebElement> trs = element.findElements(By.cssSelector("tr"));
 		List<WebElement> ths = trs.get(0).findElements(By.cssSelector("th"));
 		
-		SplitStatsDataTable dataTable = new SplitStatsDataTable();
+		RISPDataTable dataTable = new RISPDataTable();
 		
 		List<ColumnDescription> columnDescriptions= dataTable.getColumnDescriptions();
 		if(ths.size() != columnDescriptions.size()) {

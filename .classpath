@@ -42,7 +42,7 @@
 	<classpathentry kind="lib" path="selenium/libs/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="selenium/libs/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="visualization-datasource/visualization-datasource-1.1.1-src.jar"/>
-	<classpathentry kind="lib" path="visualization-datasource/visualization-datasource-1.1.1.jar"/>
+	<classpathentry kind="lib" path="visualization-datasource/visualization-datasource-1.1.1.jar" sourcepath="visualization-datasource/visualization-datasource-1.1.1-src.jar"/>
 	<classpathentry kind="lib" path="visualization-datasource/visualization-datasource-examples.jar"/>
 	<classpathentry kind="lib" path="visualization-datasource/lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="visualization-datasource/lib/commons-logging-1.1.1.jar"/>

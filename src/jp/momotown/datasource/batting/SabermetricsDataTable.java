@@ -10,7 +10,8 @@ import com.google.visualization.datasource.datatable.value.ValueType;
 public class SabermetricsDataTable extends DataTable {
 
 	public SabermetricsDataTable() {
-  	List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
+		
+		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
   	cd.add(new ColumnDescription("リーグ",	ValueType.TEXT,		"リーグ"));
   	cd.add(new ColumnDescription("NOI",			ValueType.TEXT,		"NOI"));
@@ -32,6 +33,7 @@ public class SabermetricsDataTable extends DataTable {
 		cd.add(new ColumnDescription("XRWIN",		ValueType.TEXT,		"XRWIN"));
 		
 		addColumns(cd);
+		
 	}
 
 }
