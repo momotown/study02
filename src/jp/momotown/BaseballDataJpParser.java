@@ -6,10 +6,14 @@ import jp.momotown.batting.EyeParser;
 import jp.momotown.batting.RISPParser;
 import jp.momotown.batting.SabermetricsParser;
 import jp.momotown.batting.SplitStatsParser;
+import jp.momotown.batting.SplitStatsRunnerParser;
+import jp.momotown.batting.SplitStatsScoreParser;
 import jp.momotown.datasource.batting.EyeDataTable;
 import jp.momotown.datasource.batting.RISPDataTable;
 import jp.momotown.datasource.batting.SabermetricsDataTable;
 import jp.momotown.datasource.batting.SplitStatsDataTable;
+import jp.momotown.datasource.batting.SplitStatsRunnerDataTable;
+import jp.momotown.datasource.batting.SplitStatsScoreDataTable;
 import jp.momotown.datasource.batting.TeamBattingStatsDataTable;
 
 import org.openqa.selenium.By;
@@ -63,6 +67,8 @@ public class BaseballDataJpParser {
 			SabermetricsDataTable sabermetricsDataTable = null;
 			EyeDataTable eyeDataTable = null;
 			RISPDataTable rispDataTable = null;
+			SplitStatsRunnerDataTable runnerDataTable = null;
+			SplitStatsScoreDataTable scoreDataTable = null;
 			
 			WebElement  mainElement = webDriver.findElement(By.cssSelector("div#main"));
 			List<WebElement> tables = mainElement.findElements(By.cssSelector("table.table-02"));
@@ -107,8 +113,26 @@ public class BaseballDataJpParser {
 					}
 				}
 
-				// 状況別成績マトリクス表
+				// ランナー状況別成績
+				if(null == runnerDataTable) {
+					SplitStatsRunnerParser runnerParser = new SplitStatsRunnerParser();
+					runnerDataTable = runnerParser.parse(table);
+					if(null != runnerDataTable) {
+						System.out.println("ランナー状況別成績を取得しました.");
+						continue;
+					}
+				}
+
 				// 得点差状況別成績
+				if(null == scoreDataTable) {
+					SplitStatsScoreParser scoreParser = new SplitStatsScoreParser();
+					scoreDataTable = scoreParser.parse(table);
+					if(null != scoreDataTable) {
+						System.out.println("得点差状況別成績を取得しました.");
+						continue;
+					}
+				}
+
 				// 左右投手成績
 				// イニング別成績
 				// 対戦成績
