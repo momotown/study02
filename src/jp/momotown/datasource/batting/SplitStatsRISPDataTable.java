@@ -7,9 +7,9 @@ import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.DataTable;
 import com.google.visualization.datasource.datatable.value.ValueType;
 
-public class RISPDataTable extends DataTable {
+public class SplitStatsRISPDataTable extends DataTable {
 
-	public RISPDataTable() {
+	public SplitStatsRISPDataTable() {
 		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	

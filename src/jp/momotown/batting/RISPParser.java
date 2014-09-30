@@ -3,7 +3,8 @@ package jp.momotown.batting;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.batting.RISPDataTable;
+import jp.momotown.datasource.batting.SplitStatsRISPDataTable;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -17,9 +18,9 @@ public class RISPParser {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public RISPDataTable parse(WebElement element) {
+	public SplitStatsRISPDataTable parse(WebElement element) {
 		
-		RISPDataTable dataTable = new RISPDataTable();
+		SplitStatsRISPDataTable dataTable = new SplitStatsRISPDataTable();
 		
 		if(!IsValid(element)) {
 			return null;
@@ -59,7 +60,7 @@ public class RISPParser {
 		List<WebElement> trs = element.findElements(By.cssSelector("tr"));
 		List<WebElement> ths = trs.get(0).findElements(By.cssSelector("th"));
 		
-		RISPDataTable dataTable = new RISPDataTable();
+		SplitStatsRISPDataTable dataTable = new SplitStatsRISPDataTable();
 		
 		List<ColumnDescription> columnDescriptions= dataTable.getColumnDescriptions();
 		if(ths.size() != columnDescriptions.size()) {

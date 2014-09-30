@@ -9,9 +9,9 @@ import jp.momotown.batting.SplitStatsParser;
 import jp.momotown.batting.SplitStatsRunnerParser;
 import jp.momotown.batting.SplitStatsScoreParser;
 import jp.momotown.datasource.batting.EyeDataTable;
-import jp.momotown.datasource.batting.RISPDataTable;
 import jp.momotown.datasource.batting.SabermetricsDataTable;
 import jp.momotown.datasource.batting.SplitStatsDataTable;
+import jp.momotown.datasource.batting.SplitStatsRISPDataTable;
 import jp.momotown.datasource.batting.SplitStatsRunnerDataTable;
 import jp.momotown.datasource.batting.SplitStatsScoreDataTable;
 import jp.momotown.datasource.batting.TeamBattingStatsDataTable;
@@ -66,7 +66,7 @@ public class BaseballDataJpParser {
 			SplitStatsDataTable splitStatsDataTable = null;
 			SabermetricsDataTable sabermetricsDataTable = null;
 			EyeDataTable eyeDataTable = null;
-			RISPDataTable rispDataTable = null;
+			SplitStatsRISPDataTable rispDataTable = null;
 			SplitStatsRunnerDataTable runnerDataTable = null;
 			SplitStatsScoreDataTable scoreDataTable = null;
 			
