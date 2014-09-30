@@ -5,15 +5,21 @@ import java.util.List;
 import jp.momotown.batting.EyeParser;
 import jp.momotown.batting.RISPParser;
 import jp.momotown.batting.SabermetricsParser;
+import jp.momotown.batting.SplitStatsInningParser;
 import jp.momotown.batting.SplitStatsParser;
+import jp.momotown.batting.SplitStatsPitchTypeParser;
 import jp.momotown.batting.SplitStatsRunnerParser;
 import jp.momotown.batting.SplitStatsScoreParser;
+import jp.momotown.batting.SplitStatsVsParser;
 import jp.momotown.datasource.batting.EyeDataTable;
 import jp.momotown.datasource.batting.SabermetricsDataTable;
 import jp.momotown.datasource.batting.SplitStatsDataTable;
+import jp.momotown.datasource.batting.SplitStatsInningDataTable;
+import jp.momotown.datasource.batting.SplitStatsPitchTypeDataTable;
 import jp.momotown.datasource.batting.SplitStatsRISPDataTable;
 import jp.momotown.datasource.batting.SplitStatsRunnerDataTable;
 import jp.momotown.datasource.batting.SplitStatsScoreDataTable;
+import jp.momotown.datasource.batting.SplitStatsVsDataTable;
 import jp.momotown.datasource.batting.TeamBattingStatsDataTable;
 
 import org.openqa.selenium.By;
@@ -69,6 +75,9 @@ public class BaseballDataJpParser {
 			SplitStatsRISPDataTable rispDataTable = null;
 			SplitStatsRunnerDataTable runnerDataTable = null;
 			SplitStatsScoreDataTable scoreDataTable = null;
+			SplitStatsVsDataTable splitStatsVsDataTable = null;
+			SplitStatsPitchTypeDataTable splitStatsPitchTypeDataTable = null;
+			SplitStatsInningDataTable splitStatsInningDataTable = null;
 			
 			WebElement  mainElement = webDriver.findElement(By.cssSelector("div#main"));
 			List<WebElement> tables = mainElement.findElements(By.cssSelector("table.table-02"));
@@ -134,7 +143,38 @@ public class BaseballDataJpParser {
 				}
 
 				// 左右投手成績
+				if(null == splitStatsVsDataTable) {
+					SplitStatsVsParser vsParser = new SplitStatsVsParser();
+					splitStatsVsDataTable = vsParser.parse(table);
+					if(null != splitStatsVsDataTable) {
+						System.out.println("左右投手成績を取得しました.");
+						continue;
+					}
+				}
+				
+				// 球種別成績
+				if(null == splitStatsPitchTypeDataTable) {
+					SplitStatsPitchTypeParser pitchTypeParser = new SplitStatsPitchTypeParser();
+					splitStatsPitchTypeDataTable = pitchTypeParser.parse(table);
+					if(null != splitStatsPitchTypeDataTable) {
+						System.out.println("球種別成績を取得しました.");
+						continue;
+					}
+				}
+				
+				// カウント別成績
+				// 打球方向別成績
+
 				// イニング別成績
+				if(null == splitStatsInningDataTable) {
+					SplitStatsInningParser inningParser = new SplitStatsInningParser();
+					splitStatsInningDataTable = inningParser.parse(table);
+					if(null != splitStatsInningDataTable) {
+						System.out.println("イニング別成績を取得しました.");
+						continue;
+					}
+				}
+				
 				// 対戦成績
 			}
 			
