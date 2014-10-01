@@ -5,6 +5,8 @@ import java.util.List;
 import jp.momotown.batting.EyeParser;
 import jp.momotown.batting.RISPParser;
 import jp.momotown.batting.SabermetricsParser;
+import jp.momotown.batting.SplitStatsAngleParser;
+import jp.momotown.batting.SplitStatsCountParser;
 import jp.momotown.batting.SplitStatsInningParser;
 import jp.momotown.batting.SplitStatsParser;
 import jp.momotown.batting.SplitStatsPitchTypeParser;
@@ -13,6 +15,8 @@ import jp.momotown.batting.SplitStatsScoreParser;
 import jp.momotown.batting.SplitStatsVsParser;
 import jp.momotown.datasource.batting.EyeDataTable;
 import jp.momotown.datasource.batting.SabermetricsDataTable;
+import jp.momotown.datasource.batting.SplitStatsAngleDataTable;
+import jp.momotown.datasource.batting.SplitStatsCountDataTable;
 import jp.momotown.datasource.batting.SplitStatsDataTable;
 import jp.momotown.datasource.batting.SplitStatsInningDataTable;
 import jp.momotown.datasource.batting.SplitStatsPitchTypeDataTable;
@@ -78,6 +82,8 @@ public class BaseballDataJpParser {
 			SplitStatsVsDataTable splitStatsVsDataTable = null;
 			SplitStatsPitchTypeDataTable splitStatsPitchTypeDataTable = null;
 			SplitStatsInningDataTable splitStatsInningDataTable = null;
+			SplitStatsCountDataTable splitStatsCountDataTable = null;
+			SplitStatsAngleDataTable splitStatsAngleDataTable = null;
 			
 			WebElement  mainElement = webDriver.findElement(By.cssSelector("div#main"));
 			List<WebElement> tables = mainElement.findElements(By.cssSelector("table.table-02"));
@@ -163,8 +169,15 @@ public class BaseballDataJpParser {
 				}
 				
 				// カウント別成績
-				// 打球方向別成績
-
+				if(null == splitStatsCountDataTable) {
+					SplitStatsCountParser countParser = new SplitStatsCountParser();
+					splitStatsCountDataTable = countParser.parse(table);
+					if(null != splitStatsCountDataTable) {
+						System.out.println("カウント別成績を取得しました.");
+						continue;
+					}
+				}
+				
 				// イニング別成績
 				if(null == splitStatsInningDataTable) {
 					SplitStatsInningParser inningParser = new SplitStatsInningParser();
@@ -178,6 +191,16 @@ public class BaseballDataJpParser {
 				// 対戦成績
 			}
 			
+			// 打球方向別成績
+			WebElement diamond = mainElement.findElement(By.cssSelector("div#counthoko div#diamond"));
+			if(null == splitStatsAngleDataTable) {
+				SplitStatsAngleParser angleParser = new SplitStatsAngleParser();
+				splitStatsAngleDataTable = angleParser.parse(diamond);
+				if(null != splitStatsAngleDataTable) {
+					System.out.println("打球方向別成績を取得しました.");
+				}
+			}
+
 			break; // とりあえず一人だけ
 		}
 		

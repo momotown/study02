@@ -10,6 +10,7 @@ import com.google.visualization.datasource.datatable.value.ValueType;
 public class TeamBattingStatsDataTable extends DataTable {
 
 	public TeamBattingStatsDataTable() {
+		
   	List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
   	cd.add(new ColumnDescription("team",				ValueType.TEXT,			"ãÖíc"));
@@ -54,7 +55,7 @@ public class TeamBattingStatsDataTable extends DataTable {
 		cd.add(new ColumnDescription("SO",					ValueType.NUMBER,	"éOêU"));
 		
 		addColumns(cd);
-
+		
 	}
 
 }

@@ -3,7 +3,7 @@ package jp.momotown.batting;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.batting.SplitStatsInningDataTable;
+import jp.momotown.datasource.batting.SplitStatsCountDataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -11,15 +11,15 @@ import com.google.visualization.datasource.base.TypeMismatchException;
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.TableRow;
 
-public class SplitStatsInningParser {
+public class SplitStatsCountParser {
 
-	public SplitStatsInningParser() {
+	public SplitStatsCountParser() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 	
-	public SplitStatsInningDataTable parse(WebElement element) {
+	public SplitStatsCountDataTable parse(WebElement element) {
 		
-		SplitStatsInningDataTable dataTable = new SplitStatsInningDataTable();
+		SplitStatsCountDataTable dataTable = new SplitStatsCountDataTable();
 		
 		if(!IsValid(element)) {
 			return null;
@@ -59,7 +59,7 @@ public class SplitStatsInningParser {
 		List<WebElement> trs = element.findElements(By.cssSelector("tr"));
 		List<WebElement> ths = trs.get(0).findElements(By.cssSelector("th"));
 		
-		SplitStatsInningDataTable dataTable = new SplitStatsInningDataTable();
+		SplitStatsCountDataTable dataTable = new SplitStatsCountDataTable();
 		
 		List<ColumnDescription> columnDescriptions= dataTable.getColumnDescriptions();
 		if(ths.size() != columnDescriptions.size()) {
