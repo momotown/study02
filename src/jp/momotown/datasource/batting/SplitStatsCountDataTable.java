@@ -13,7 +13,7 @@ public class SplitStatsCountDataTable extends DataTable {
 		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
-		cd.add(new ColumnDescription("count",	ValueType.TEXT,		"カウント"));
+		cd.add(new ColumnDescription("count",		ValueType.TEXT,		"カウント"));
 		cd.add(new ColumnDescription("BA",			ValueType.TEXT,		"打率"));
 		cd.add(new ColumnDescription("AB",			ValueType.TEXT,		"打数"));
 		cd.add(new ColumnDescription("H",				ValueType.TEXT,		"安打"));

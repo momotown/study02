@@ -56,6 +56,21 @@ public class BaseballDataJpParser {
 		
 		webDriver.get(baseUrl);
 		
+//		parseBatting(teamName);
+		parsePitching(teamName);
+		
+		tearDown();
+		
+	}
+
+	private void tearDown() {
+		
+		webDriver.quit();
+		
+	}
+	
+	public void parseBatting(String teamName) {
+		
 		webDriver.findElement(By.linkText(teamName)).click();
 		
 		webDriver.findElement(By.linkText("チーム打撃成績")).click();
@@ -203,17 +218,17 @@ public class BaseballDataJpParser {
 
 			break; // とりあえず一人だけ
 		}
-		
-		//webDriver.findElement(By.linkText("チーム投手成績")).click();
-		
-		tearDown();
-		
 	}
-
-	private void tearDown() {
+	
+	public void parsePitching(String teamName) {
 		
-		this.webDriver.quit();
+		webDriver.findElement(By.linkText(teamName)).click();
 		
+		webDriver.findElement(By.linkText("チーム投手成績")).click();
+		
+		WebElement tableElement = webDriver.findElement(By.cssSelector("table.table-02"));
+		TeamPitchingParser teamPitchingParser = new TeamPitchingParser(webDriver);
+		teamPitchingParser.parse(tableElement);
 	}
 
 }

@@ -7,9 +7,9 @@ import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.DataTable;
 import com.google.visualization.datasource.datatable.value.ValueType;
 
-public class TeamPitchingStatsDataTable extends DataTable {
+public class TeamStatsDataTable extends DataTable {
 
-	public TeamPitchingStatsDataTable() {
+	public TeamStatsDataTable() {
 		
   	List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
