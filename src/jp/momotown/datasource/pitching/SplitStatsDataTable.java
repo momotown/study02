@@ -43,7 +43,7 @@ public class SplitStatsDataTable extends DataTable {
 		cd.add(new ColumnDescription("UC-AB",				ValueType.TEXT,			"UC‘Å”"));
 		cd.add(new ColumnDescription("UC-H",				ValueType.TEXT,			"UC”íˆÀ‘Å"));
 		cd.add(new ColumnDescription("UC-BA",				ValueType.TEXT,			"UC”í‘Å—¦"));
-		cd.add(new ColumnDescription("UC-HR",				ValueType.TEXT,			"UC–{—Û‘Å"));
+		cd.add(new ColumnDescription("UC-HR",				ValueType.TEXT,			"UC”í–{—Û‘Å"));
 		cd.add(new ColumnDescription("MaxSpeed",		ValueType.TEXT,			"Å‚‹…‘¬"));
 		cd.add(new ColumnDescription("MinSpped",		ValueType.TEXT,			"Å’á‹…‘¬"));
 		cd.add(new ColumnDescription("SpeedDiff",		ValueType.TEXT,			"‹…‘¬·"));

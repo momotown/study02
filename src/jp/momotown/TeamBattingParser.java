@@ -2,17 +2,7 @@ package jp.momotown;
 
 import java.util.List;
 
-import jp.momotown.batting.EyeParser;
-import jp.momotown.batting.RISPParser;
-import jp.momotown.batting.SabermetricsParser;
-import jp.momotown.batting.SplitStatsAngleParser;
-import jp.momotown.batting.SplitStatsCountParser;
-import jp.momotown.batting.SplitStatsInningParser;
-import jp.momotown.batting.SplitStatsParser;
-import jp.momotown.batting.SplitStatsPitchTypeParser;
-import jp.momotown.batting.SplitStatsRunnerParser;
-import jp.momotown.batting.SplitStatsScoreParser;
-import jp.momotown.batting.SplitStatsVsParser;
+import jp.momotown.datasource.PlayerStatsLinkDataTable;
 import jp.momotown.datasource.batting.EyeDataTable;
 import jp.momotown.datasource.batting.SabermetricsDataTable;
 import jp.momotown.datasource.batting.SplitStatsAngleDataTable;
@@ -24,77 +14,67 @@ import jp.momotown.datasource.batting.SplitStatsRISPDataTable;
 import jp.momotown.datasource.batting.SplitStatsRunnerDataTable;
 import jp.momotown.datasource.batting.SplitStatsScoreDataTable;
 import jp.momotown.datasource.batting.SplitStatsVsDataTable;
-import jp.momotown.datasource.batting.TeamBattingStatsDataTable;
+import jp.momotown.datasource.batting.TeamStatsDataTable;
+import jp.momotown.batting.EyeParser;
+import jp.momotown.batting.RISPParser;
+import jp.momotown.batting.SabermetricsParser;
+import jp.momotown.batting.SplitStatsAngleParser;
+import jp.momotown.batting.SplitStatsCountParser;
+import jp.momotown.batting.SplitStatsInningParser;
+import jp.momotown.batting.SplitStatsParser;
+import jp.momotown.batting.SplitStatsPitchTypeParser;
+import jp.momotown.batting.SplitStatsRunnerParser;
+import jp.momotown.batting.SplitStatsScoreParser;
+import jp.momotown.batting.SplitStatsVsParser;
+import jp.momotown.batting.TeamStatsParser;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.google.visualization.datasource.datatable.TableCell;
 
-public class BaseballDataJpParser {
+public class TeamBattingParser {
 
 	private WebDriver webDriver;
-	private String baseUrl;
 
-	public BaseballDataJpParser() {
+	public TeamBattingParser(WebDriver webDriver) {
 
-		
+		this.webDriver = webDriver;
 	}
-
+	
 	private void setUp() {
-		
-		webDriver = new FirefoxDriver();
-		baseUrl = "http://baseballdata.jp/index.html";
-		
-	}
-
-	public void parse(String teamName) {
-		
-		setUp();
-		
-		webDriver.get(baseUrl);
-		
-		parseBatting(teamName);
-		parsePitching(teamName);
-		
-		tearDown();
 		
 	}
 
 	private void tearDown() {
 		
-		webDriver.quit();
-		
 	}
 	
-	public void parseBatting(String teamName) {
+	public void parse(WebElement element) {
 		
-		webDriver.findElement(By.linkText(teamName)).click();
+		setUp();
 		
-		webDriver.findElement(By.linkText("チーム打撃成績")).click();
+		TeamStatsParser teamStatsParser = new TeamStatsParser();
+		TeamStatsDataTable teamStatsDataTable = teamStatsParser.parse(element);
+		if(null == teamStatsDataTable) {
+			return;
+		}
 		
-		WebElement tableElement = webDriver.findElement(By.cssSelector("table.table-02"));
+		PlayerStatsLinkParser playerStatsLinkParser = new PlayerStatsLinkParser();
+		PlayerStatsLinkDataTable playerStatsLinkDataTable = playerStatsLinkParser.parse(element, teamStatsDataTable);
+		if(null == playerStatsLinkDataTable) {
+			return;
+		}
 		
-		
-		
-		
-		TeamBattingParser teamBattingParser = new TeamBattingParser(webDriver);
-		teamBattingParser.parse(tableElement);
-
-		
-		
-		
-		TeamBattingStatsParser teamBattingStatsParser = new TeamBattingStatsParser();
-		TeamBattingStatsDataTable dataTable = teamBattingStatsParser.parse(tableElement);
-		List<TableCell> tableCells = dataTable.getColumnCells("link");
+		// 各選手
+		List<TableCell> tableCells = playerStatsLinkDataTable.getColumnCells("link");
 		for(TableCell tableCell : tableCells) {
 			String link = tableCell.toString();
 			if(link.isEmpty()) {
 				continue;
 			}
-
+			
 			webDriver.get(link);
 			
 			SplitStatsDataTable splitStatsDataTable = null;
@@ -108,7 +88,7 @@ public class BaseballDataJpParser {
 			SplitStatsInningDataTable splitStatsInningDataTable = null;
 			SplitStatsCountDataTable splitStatsCountDataTable = null;
 			SplitStatsAngleDataTable splitStatsAngleDataTable = null;
-			
+
 			WebElement  mainElement = webDriver.findElement(By.cssSelector("div#main"));
 			List<WebElement> tables = mainElement.findElements(By.cssSelector("table.table-02"));
 			for(WebElement table : tables) {
@@ -224,20 +204,13 @@ public class BaseballDataJpParser {
 					System.out.println("打球方向別成績を取得しました.");
 				}
 			}
-
+			
 			break; // とりあえず一人だけ
 		}
+		
+		tearDown();
+		
 	}
-	
-	public void parsePitching(String teamName) {
-		
-		webDriver.findElement(By.linkText(teamName)).click();
-		
-		webDriver.findElement(By.linkText("チーム投手成績")).click();
-		
-		WebElement tableElement = webDriver.findElement(By.cssSelector("table.table-02"));
-		TeamPitchingParser teamPitchingParser = new TeamPitchingParser(webDriver);
-		teamPitchingParser.parse(tableElement);
-	}
+
 
 }

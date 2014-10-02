@@ -3,6 +3,7 @@ package jp.momotown;
 import java.util.List;
 
 import jp.momotown.pitching.SplitStatsParser;
+import jp.momotown.datasource.PlayerStatsLinkDataTable;
 import jp.momotown.datasource.pitching.SplitStatsDataTable;
 import jp.momotown.datasource.pitching.TeamStatsDataTable;
 import jp.momotown.pitching.TeamStatsParser;
@@ -10,6 +11,7 @@ import jp.momotown.pitching.TeamStatsParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.google.visualization.datasource.datatable.TableCell;
 
 public class TeamPitchingParser {
@@ -39,8 +41,14 @@ public class TeamPitchingParser {
 			return;
 		}
 		
+		PlayerStatsLinkParser playerStatsLinkParser = new PlayerStatsLinkParser();
+		PlayerStatsLinkDataTable playerStatsLinkDataTable = playerStatsLinkParser.parse(element, teamStatsDataTable);
+		if(null == playerStatsLinkDataTable) {
+			return;
+		}
+		
 		// 各選手
-		List<TableCell> tableCells = teamStatsDataTable.getColumnCells("link");
+		List<TableCell> tableCells = playerStatsLinkDataTable.getColumnCells("link");
 		for(TableCell tableCell : tableCells) {
 			String link = tableCell.toString();
 			if(link.isEmpty()) {
@@ -49,11 +57,11 @@ public class TeamPitchingParser {
 			
 			webDriver.get(link);
 			
+			SplitStatsDataTable splitStatsDataTable = null;
+
 			WebElement  mainElement = webDriver.findElement(By.cssSelector("div#main"));
 			List<WebElement> tables = mainElement.findElements(By.cssSelector("table.table-02"));
 			for(WebElement table : tables) {
-				
-				SplitStatsDataTable splitStatsDataTable = null;
 				// Splits
 				if(null == splitStatsDataTable) {
 					SplitStatsParser splitStatsParser = new SplitStatsParser();
@@ -63,9 +71,9 @@ public class TeamPitchingParser {
 						continue;
 					}
 				}
-				
-				break; // とりあえず一人だけ
 			}
+			
+			break; // とりあえず一人だけ
 		}
 		
 		tearDown();

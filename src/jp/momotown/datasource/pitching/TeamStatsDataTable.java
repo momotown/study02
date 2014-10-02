@@ -13,10 +13,10 @@ public class TeamStatsDataTable extends DataTable {
 		
   	List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
+   	cd.add(new ColumnDescription("rank",				ValueType.TEXT,			"‡ˆÊ"));
   	cd.add(new ColumnDescription("team",				ValueType.TEXT,			"‹…’c"));
 		cd.add(new ColumnDescription("name",				ValueType.TEXT,			"‘Iè–¼"));
-		cd.add(new ColumnDescription("link",				ValueType.TEXT,			"ƒŠƒ“ƒN"));
-		cd.add(new ColumnDescription("isFirst",			ValueType.BOOLEAN,	"ˆêŒR"));
+		cd.add(new ColumnDescription("first",				ValueType.TEXT,			"ˆêŒR"));
 		cd.add(new ColumnDescription("ERA",					ValueType.TEXT,			"–hŒä—¦"));
 		cd.add(new ColumnDescription("Wins",				ValueType.TEXT,			"Ÿ"));
 		cd.add(new ColumnDescription("Losses",			ValueType.TEXT,			"•‰"));
@@ -44,6 +44,8 @@ public class TeamStatsDataTable extends DataTable {
 		cd.add(new ColumnDescription("WHIP",				ValueType.TEXT,			"WHIP"));
 		cd.add(new ColumnDescription("UP-AB",				ValueType.TEXT,			"UP‘Å”"));
 		cd.add(new ColumnDescription("UP-H",				ValueType.TEXT,			"UP”íˆÀ‘Å"));
+		cd.add(new ColumnDescription("UP-BA",				ValueType.TEXT,			"UP”í‘Å—¦"));
+		cd.add(new ColumnDescription("UP-HR",				ValueType.TEXT,			"UP”í–{—Û‘Å"));
 		cd.add(new ColumnDescription("MaxSpeed",		ValueType.TEXT,			"Å‚‹…‘¬"));
 		cd.add(new ColumnDescription("MinSpped",		ValueType.TEXT,			"Å’á‹…‘¬"));
 		cd.add(new ColumnDescription("SpeedDiff",		ValueType.TEXT,			"‹…‘¬·"));

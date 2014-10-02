@@ -1,9 +1,9 @@
-package jp.momotown.pitching;
+package jp.momotown.batting;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.pitching.TeamStatsDataTable;
+import jp.momotown.datasource.batting.TeamStatsDataTable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -77,5 +77,6 @@ public class TeamStatsParser {
 		return true;
 		
 	}
+
 
 }
