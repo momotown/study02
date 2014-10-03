@@ -13,11 +13,11 @@ public class SplitStatsInningDataTable extends DataTable {
 		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
-		cd.add(new ColumnDescription("inning",	ValueType.TEXT,		"イニング"));
+		cd.add(new ColumnDescription("inning",		ValueType.TEXT,		"イニング"));
 		cd.add(new ColumnDescription("BA",			ValueType.TEXT,		"率"));
 		cd.add(new ColumnDescription("PA",			ValueType.TEXT,		"打席"));
 		cd.add(new ColumnDescription("AB",			ValueType.TEXT,		"打数"));
-		cd.add(new ColumnDescription("H",				ValueType.TEXT,		"安打"));
+		cd.add(new ColumnDescription("H",			ValueType.TEXT,		"安打"));
 		cd.add(new ColumnDescription("HR",			ValueType.TEXT,		"本"));
 		cd.add(new ColumnDescription("SO",			ValueType.TEXT,		"三振"));
 		cd.add(new ColumnDescription("1B",			ValueType.TEXT,		"1B"));

@@ -13,8 +13,8 @@ public class SplitStatsVsDataTable extends DataTable {
 		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
-  	cd.add(new ColumnDescription("hand",	ValueType.TEXT,		""));
-  	cd.add(new ColumnDescription("BA",		ValueType.TEXT,		"ë≈ó¶"));
+		cd.add(new ColumnDescription("hand",	ValueType.TEXT,		""));
+		cd.add(new ColumnDescription("BA",		ValueType.TEXT,		"ë≈ó¶"));
 		cd.add(new ColumnDescription("RBI",		ValueType.TEXT,		"ë≈ì_"));
 		cd.add(new ColumnDescription("HR",		ValueType.TEXT,		"ñ{ó€ë≈"));
 		cd.add(new ColumnDescription("PA",		ValueType.TEXT,		"ë≈ê»êî"));

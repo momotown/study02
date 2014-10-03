@@ -17,7 +17,7 @@ public class SplitStatsAngleDataTable extends DataTable {
 		cd.add(new ColumnDescription("BA",			ValueType.TEXT,		"ë≈ó¶"));
 		cd.add(new ColumnDescription("HR",			ValueType.TEXT,		"ñ{ó€ë≈"));
 		cd.add(new ColumnDescription("AB",			ValueType.TEXT,		"ë≈êî"));
-		cd.add(new ColumnDescription("H",				ValueType.TEXT,		"à¿ë≈"));
+		cd.add(new ColumnDescription("H",			ValueType.TEXT,		"à¿ë≈"));
 		
 		addColumns(cd);
 		

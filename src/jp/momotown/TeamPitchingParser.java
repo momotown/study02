@@ -4,6 +4,7 @@ import java.util.List;
 
 import jp.momotown.pitching.SplitStatsParser;
 import jp.momotown.datasource.PlayerStatsLinkDataTable;
+import jp.momotown.datasource.TeamPitchingData;
 import jp.momotown.datasource.pitching.SplitStatsDataTable;
 import jp.momotown.datasource.pitching.TeamStatsDataTable;
 import jp.momotown.pitching.TeamStatsParser;
@@ -31,21 +32,22 @@ public class TeamPitchingParser {
 		
 	}
 	
-	public void parse(WebElement element) {
+	public TeamPitchingData parse(WebElement element) {
 		
 		setUp();
 		
+		TeamPitchingData teamPitchingData = new TeamPitchingData();
+		
+		// チーム投手成績を解析する
 		TeamStatsParser teamStatsParser = new TeamStatsParser();
-		TeamStatsDataTable teamStatsDataTable = teamStatsParser.parse(element);
-		if(null == teamStatsDataTable) {
-			return;
+		teamPitchingData.teamStatsDataTable = teamStatsParser.parse(element);
+		if(null == teamPitchingData.teamStatsDataTable) {
+			return teamPitchingData;
 		}
 		
+		// 個人成績へのリンクを解析する
 		PlayerStatsLinkParser playerStatsLinkParser = new PlayerStatsLinkParser();
-		PlayerStatsLinkDataTable playerStatsLinkDataTable = playerStatsLinkParser.parse(element, teamStatsDataTable);
-		if(null == playerStatsLinkDataTable) {
-			return;
-		}
+		teamPitchingData.playerStatsLinkDataTable = playerStatsLinkParser.parse(element, teamPitchingData.teamStatsDataTable);
 		
 		// 各選手
 		List<TableCell> tableCells = playerStatsLinkDataTable.getColumnCells("link");
@@ -77,6 +79,8 @@ public class TeamPitchingParser {
 		}
 		
 		tearDown();
+		
+		return teamPitchingData;
 		
 	}
 

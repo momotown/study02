@@ -20,6 +20,7 @@ public class SplitStatsScoreParser {
 	}
 	
 	public SplitStatsScoreDataTable parse(WebElement element) {
+		
 		SplitStatsScoreDataTable dataTable = new SplitStatsScoreDataTable();
 		
 		if(!IsValid(element)) {

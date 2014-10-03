@@ -13,12 +13,12 @@ public class SplitStatsPitchTypeDataTable extends DataTable {
 		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
-  	cd.add(new ColumnDescription("type",		ValueType.TEXT,		"球種"));
-  	cd.add(new ColumnDescription("BA",			ValueType.TEXT,		"打率"));
+		cd.add(new ColumnDescription("type",		ValueType.TEXT,		"球種"));
+		cd.add(new ColumnDescription("BA",			ValueType.TEXT,		"打率"));
 		cd.add(new ColumnDescription("AB",			ValueType.TEXT,		"打数"));
-		cd.add(new ColumnDescription("H",				ValueType.TEXT,		"安打"));
+		cd.add(new ColumnDescription("H",			ValueType.TEXT,		"安打"));
 		cd.add(new ColumnDescription("HR",			ValueType.TEXT,		"本"));
-		cd.add(new ColumnDescription("BB+HBP",	ValueType.TEXT,		"四死"));
+		cd.add(new ColumnDescription("BB+HBP",		ValueType.TEXT,		"四死"));
 		cd.add(new ColumnDescription("SO",			ValueType.TEXT,		"三振"));
 		
 		addColumns(cd);

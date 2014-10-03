@@ -16,7 +16,7 @@ public class SplitStatsCountDataTable extends DataTable {
 		cd.add(new ColumnDescription("count",		ValueType.TEXT,		"カウント"));
 		cd.add(new ColumnDescription("BA",			ValueType.TEXT,		"打率"));
 		cd.add(new ColumnDescription("AB",			ValueType.TEXT,		"打数"));
-		cd.add(new ColumnDescription("H",				ValueType.TEXT,		"安打"));
+		cd.add(new ColumnDescription("H",			ValueType.TEXT,		"安打"));
 		cd.add(new ColumnDescription("1B",			ValueType.TEXT,		"単打"));
 		cd.add(new ColumnDescription("2B",			ValueType.TEXT,		"2塁打"));
 		cd.add(new ColumnDescription("3B",			ValueType.TEXT,		"3塁打"));
