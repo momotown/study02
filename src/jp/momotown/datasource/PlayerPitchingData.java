@@ -14,11 +14,11 @@ public class PlayerPitchingData {
 	public String name;
 	public SplitStatsDataTable				splitStatsDataTable;			// Split
 	public SabermetricsDataTable			sabermetricsDataTable;			// セイバーメトリクス成績
-	public SplitStatsRISPDataTable			splitStatsRISPDataTable;		// 得点圏成績
-	public SplitStatsRunnerDataTable		splitStatsRunnerDataTable;		// 状況別成績マトリクス表
-	public SplitStatsVsDataTable			splitStatsVsDataTable;			// 左右投手成績
-	public SplitStatsPitchTypeDataTable	splitStatsPitchTypeDataTable;	// 球種別被安打割合
-	public SplitStatsCountDataTable		splitStatsCountDataTable;		// カウント別球種配分＆成績
+	public SplitStatsRISPDataTable			splitStatsRISPDataTable;		// 得点圏被打率成績
+	public SplitStatsRunnerDataTable		splitStatsRunnerDataTable;		// 状況別成績
+	public SplitStatsVsDataTable			splitStatsVsDataTable;			// 左右打者別成績
+	public SplitStatsPitchTypeDataTable	splitStatsPitchTypeDataTable;	// 球種別成績
+	public SplitStatsCountDataTable		splitStatsCountDataTable;		// カウント別成績
 
 	public PlayerPitchingData() {
 		// TODO 自動生成されたコンストラクター・スタブ

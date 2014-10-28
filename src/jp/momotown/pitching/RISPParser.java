@@ -1,9 +1,9 @@
-package jp.momotown.batting;
+package jp.momotown.pitching;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.batting.SplitStatsVsDataTable;
+import jp.momotown.datasource.pitching.SplitStatsRISPDataTable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,15 +12,15 @@ import com.google.visualization.datasource.base.TypeMismatchException;
 import com.google.visualization.datasource.datatable.ColumnDescription;
 import com.google.visualization.datasource.datatable.TableRow;
 
-public class SplitStatsVsParser {
+public class RISPParser {
 
-	public SplitStatsVsParser() {
+	public RISPParser() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
-	public SplitStatsVsDataTable parse(WebElement element) {
+	public SplitStatsRISPDataTable parse(WebElement element) {
 		
-		SplitStatsVsDataTable dataTable = new SplitStatsVsDataTable();
+		SplitStatsRISPDataTable dataTable = new SplitStatsRISPDataTable();
 		
 		if(!IsValid(element)) {
 			return null;
@@ -60,7 +60,7 @@ public class SplitStatsVsParser {
 		List<WebElement> trs = element.findElements(By.cssSelector("tr"));
 		List<WebElement> ths = trs.get(0).findElements(By.cssSelector("th"));
 		
-		SplitStatsVsDataTable dataTable = new SplitStatsVsDataTable();
+		SplitStatsRISPDataTable dataTable = new SplitStatsRISPDataTable();
 		
 		List<ColumnDescription> columnDescriptions= dataTable.getColumnDescriptions();
 		if(ths.size() != columnDescriptions.size()) {
@@ -77,5 +77,4 @@ public class SplitStatsVsParser {
 		return true;
 		
 	}
-
 }

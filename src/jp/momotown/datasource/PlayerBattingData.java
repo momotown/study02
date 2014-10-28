@@ -20,7 +20,7 @@ public class PlayerBattingData {
 	public SabermetricsDataTable			sabermetricsDataTable;			// セイバーメトリクス成績
 	public EyeDataTable					eyeDataTable;					// 選球眼関連
 	public SplitStatsRISPDataTable			splitStatsRISPDataTable;		// 得点圏成績
-	public SplitStatsRunnerDataTable		splitStatsRunnerDataTable;		// 状況別成績マトリクス表
+	public SplitStatsRunnerDataTable		splitStatsRunnerDataTable;		// 状況別成績
 	public SplitStatsScoreDataTable		splitStatsScoreDataTable;		// 得点差状況別成績
 	public SplitStatsVsDataTable			splitStatsVsDataTable;			// 左右投手成績
 	public SplitStatsPitchTypeDataTable	splitStatsPitchTypeDataTable;	// 球種別安打割合

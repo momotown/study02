@@ -1,9 +1,9 @@
-package jp.momotown.batting;
+package jp.momotown.pitching;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import jp.momotown.datasource.batting.SplitStatsVsDataTable;
+import jp.momotown.datasource.pitching.SplitStatsVsDataTable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

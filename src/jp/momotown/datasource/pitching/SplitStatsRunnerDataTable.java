@@ -15,11 +15,11 @@ public class SplitStatsRunnerDataTable extends DataTable {
 
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
 		
-		cd.add(new ColumnDescription("runnner",			ValueType.TEXT,		""));
-		cd.add(new ColumnDescription("behind",			ValueType.TEXT,		"ビハインド"));
-		cd.add(new ColumnDescription("even",				ValueType.TEXT,		"同点"));
-		cd.add(new ColumnDescription("lead",				ValueType.TEXT,		"リード"));
-		cd.add(new ColumnDescription("total",				ValueType.TEXT,		"計"));
+		cd.add(new ColumnDescription("runnner",		ValueType.TEXT,		""));
+		cd.add(new ColumnDescription("lead",		ValueType.TEXT,		"リード"));
+		cd.add(new ColumnDescription("even",		ValueType.TEXT,		"同点"));
+		cd.add(new ColumnDescription("behind",		ValueType.TEXT,		"ビハインド"));
+		cd.add(new ColumnDescription("total",		ValueType.TEXT,		"計"));
 		
 		addColumns(cd);
 		

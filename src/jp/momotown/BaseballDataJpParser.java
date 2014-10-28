@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.momotown.datasource.PlayerBattingData;
+import jp.momotown.datasource.PlayerPitchingData;
 import jp.momotown.datasource.TeamBattingData;
 import jp.momotown.datasource.TeamPitchingData;
 
@@ -46,7 +47,7 @@ public class BaseballDataJpParser {
 		// チーム投手成績を解析する
 		webDriver.findElement(By.linkText(teamName)).click();
 		webDriver.findElement(By.linkText("チーム投手成績")).click();
-		parsePitching(teamName);
+		List<PlayerPitchingData> playerPitchingDataList = parsePitching(teamName);
 		
 		tearDown();
 		
@@ -58,7 +59,7 @@ public class BaseballDataJpParser {
 		
 	}
 	
-	public List<PlayerBattingData> parseBatting(String team) {
+	public List<PlayerBattingData> parseBatting(String teamName) {
 		
 		List<PlayerBattingData> playerBattingDataList = new ArrayList<PlayerBattingData>();
 		
@@ -75,42 +76,30 @@ public class BaseballDataJpParser {
 			if(link.isEmpty()) {
 				continue;
 			}
-			
+
+			System.out.println(String.format("%sの<< %s >>を丸裸にするぞ", teamName, name));
+
 			PlayerBattingParser playerBattingParser = new PlayerBattingParser();
 			PlayerBattingData playerBattingData = playerBattingParser.parse(link);
 			if(null != playerBattingData) {
-				playerBattingData.team = team;
+				playerBattingData.team = teamName;
 				playerBattingData.name = name;
 				playerBattingDataList.add(playerBattingData);
 			}
 			
 			break; // とりあえず一人だけ
 		}
-//		List<TableCell> tableCells = teamBattingData.playerStatsLinkDataTable.getColumnCells("link");
-//		for(TableCell tableCell : tableCells) {
-//			String link = tableCell.toString();
-//			if(link.isEmpty()) {
-//				continue;
-//			}
-//			
-//			PlayerBattingParser playerBattingParser = new PlayerBattingParser();
-//			PlayerBattingData playerBattingData = playerBattingParser.parse(link);
-//			if(null != playerBattingData) {
-//				playerBattingData.team
-//				playerBattingDataList.add(playerBattingData);
-//			}
-//			
-//			break; // とりあえず一人だけ
-//		}
 		
 		return playerBattingDataList;
 		
 	}
 	
-	public void parsePitching(String teamName) {
+	public List<PlayerPitchingData> parsePitching(String teamName) {
+		
+		List<PlayerPitchingData> playerPitchingDataList = new ArrayList<PlayerPitchingData>();
 		
 		WebElement tableElement = webDriver.findElement(By.cssSelector("table.table-02"));
-		TeamPitchingParser teamPitchingParser = new TeamPitchingParser(webDriver);
+		TeamPitchingParser teamPitchingParser = new TeamPitchingParser();
 		TeamPitchingData teamPitchingData = teamPitchingParser.parse(tableElement);
 		
 		// 個人成績を解析する
@@ -122,16 +111,20 @@ public class BaseballDataJpParser {
 				continue;
 			}
 			
-			PlayerBattingParser playerBattingParser = new PlayerBattingParser();
-			PlayerBattingData playerBattingData = playerBattingParser.parse(link);
-			if(null != playerBattingData) {
-				playerBattingData.team = team;
-				playerBattingData.name = name;
-				playerBattingDataList.add(playerBattingData);
+			System.out.println(String.format("%sの<< %s >>を丸裸にするぞ", teamName, name));
+			
+			PlayerPitchingParser playerPitchingParser = new PlayerPitchingParser();
+			PlayerPitchingData playerPitchingData = playerPitchingParser.parse(link);
+			if(null != playerPitchingData) {
+				playerPitchingData.team = teamName;
+				playerPitchingData.name = name;
+				playerPitchingDataList.add(playerPitchingData);
 			}
 			
 			break; // とりあえず一人だけ
 		}
+		
+		return playerPitchingDataList;
 		
 	}
 
