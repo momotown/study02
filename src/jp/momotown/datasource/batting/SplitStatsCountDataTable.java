@@ -11,6 +11,8 @@ public class SplitStatsCountDataTable extends DataTable {
 
 	public SplitStatsCountDataTable() {
 		
+		setCustomProperty("テーブル名", "カウント別成績");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("count",		ValueType.TEXT,		"カウント"));

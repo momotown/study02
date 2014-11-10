@@ -11,6 +11,8 @@ public class SplitStatsVsDataTable extends DataTable {
 
 	public SplitStatsVsDataTable() {
 		
+		setCustomProperty("テーブル名", "左右投手成績");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("hand",	ValueType.TEXT,		""));
@@ -19,7 +21,7 @@ public class SplitStatsVsDataTable extends DataTable {
 		cd.add(new ColumnDescription("HR",		ValueType.TEXT,		"本塁打"));
 		cd.add(new ColumnDescription("PA",		ValueType.TEXT,		"打席数"));
 		cd.add(new ColumnDescription("AB",		ValueType.TEXT,		"打数"));
-		cd.add(new ColumnDescription("H",			ValueType.TEXT,		"安打"));
+		cd.add(new ColumnDescription("H",		ValueType.TEXT,		"安打"));
 		cd.add(new ColumnDescription("1B",		ValueType.TEXT,		"単打"));
 		cd.add(new ColumnDescription("2B",		ValueType.TEXT,		"2塁打"));
 		cd.add(new ColumnDescription("3B",		ValueType.TEXT,		"3塁打"));

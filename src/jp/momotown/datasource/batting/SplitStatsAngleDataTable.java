@@ -11,6 +11,8 @@ public class SplitStatsAngleDataTable extends DataTable {
 
 	public SplitStatsAngleDataTable() {
 		
+		setCustomProperty("ƒe[ƒuƒ‹–¼", "‘Å‹…•ûŒü•Ê¬Ñ");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("angle",		ValueType.TEXT,		"•ûŒü"));

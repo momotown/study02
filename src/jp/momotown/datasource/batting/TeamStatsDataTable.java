@@ -11,6 +11,8 @@ public class TeamStatsDataTable extends DataTable {
 
 	public TeamStatsDataTable() {
 		
+	setCustomProperty("ƒe[ƒuƒ‹–¼", "‘ÅÒ¬Ñ");
+		
   	List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
    	cd.add(new ColumnDescription("rank",			ValueType.TEXT,		"‡ˆÊ"));

@@ -11,6 +11,8 @@ public class SplitStatsRISPDataTable extends DataTable {
 
 	public SplitStatsRISPDataTable() {
 		
+		setCustomProperty("テーブル名", "得点圏被打率成績");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 	  	cd.add(new ColumnDescription("splits",		ValueType.TEXT,		""));

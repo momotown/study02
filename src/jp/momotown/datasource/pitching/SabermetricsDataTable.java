@@ -11,6 +11,8 @@ public class SabermetricsDataTable extends DataTable {
 
 	public SabermetricsDataTable() {
 		
+		setCustomProperty("テーブル名", "セイバーメトリクス成績");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("league",		ValueType.TEXT,		"リーグ"));

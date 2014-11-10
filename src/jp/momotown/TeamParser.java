@@ -6,6 +6,7 @@ import java.util.List;
 import jp.momotown.datasource.PlayerBattingData;
 import jp.momotown.datasource.PlayerPitchingData;
 import jp.momotown.datasource.TeamBattingData;
+import jp.momotown.datasource.TeamData;
 import jp.momotown.datasource.TeamPitchingData;
 
 import org.openqa.selenium.By;
@@ -13,15 +14,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.google.visualization.datasource.datatable.TableCell;
 import com.google.visualization.datasource.datatable.TableRow;
 
-public class BaseballDataJpParser {
+public class TeamParser {
 
 	private WebDriver webDriver;
 	private String baseUrl;
 
-	public BaseballDataJpParser() {
+	public TeamParser() {
 
 		
 	}
@@ -33,23 +33,27 @@ public class BaseballDataJpParser {
 		
 	}
 
-	public void parse(String teamName) {
+	public TeamData parse(String teamName) {
 		
 		setUp();
 		
 		webDriver.get(baseUrl);
 		
+		TeamData teamData = new TeamData(teamName);
+		
 		// チーム打撃成績を解析する
 		webDriver.findElement(By.linkText(teamName)).click();
 		webDriver.findElement(By.linkText("チーム打撃成績")).click();
-		List<PlayerBattingData> playerBattingDataList = parseBatting(teamName);
+		teamData.playerBattingDataList = parsePlayerBatting(teamName);
 		
 		// チーム投手成績を解析する
 		webDriver.findElement(By.linkText(teamName)).click();
 		webDriver.findElement(By.linkText("チーム投手成績")).click();
-		List<PlayerPitchingData> playerPitchingDataList = parsePitching(teamName);
+		teamData.playerPitchingDataList = parsePlayerPitching(teamName);
 		
 		tearDown();
+		
+		return teamData;
 		
 	}
 
@@ -59,7 +63,7 @@ public class BaseballDataJpParser {
 		
 	}
 	
-	public List<PlayerBattingData> parseBatting(String teamName) {
+	public List<PlayerBattingData> parsePlayerBatting(String teamName) {
 		
 		List<PlayerBattingData> playerBattingDataList = new ArrayList<PlayerBattingData>();
 		
@@ -68,7 +72,7 @@ public class BaseballDataJpParser {
 		TeamBattingParser teamBattingParser = new TeamBattingParser();
 		TeamBattingData teamBattingData = teamBattingParser.parse(tableElement);
 		
-		// 個人成績を解析する
+		// 個人打撃成績を解析する
 		List<TableRow> rows = teamBattingData.playerStatsLinkDataTable.getRows();
 		for(TableRow row : rows) {
 			String name = row.getCell(teamBattingData.playerStatsLinkDataTable.getColumnIndex("name")).toString();
@@ -94,15 +98,16 @@ public class BaseballDataJpParser {
 		
 	}
 	
-	public List<PlayerPitchingData> parsePitching(String teamName) {
+	public List<PlayerPitchingData> parsePlayerPitching(String teamName) {
 		
 		List<PlayerPitchingData> playerPitchingDataList = new ArrayList<PlayerPitchingData>();
 		
+		// チーム投手成績を解析する
 		WebElement tableElement = webDriver.findElement(By.cssSelector("table.table-02"));
 		TeamPitchingParser teamPitchingParser = new TeamPitchingParser();
 		TeamPitchingData teamPitchingData = teamPitchingParser.parse(tableElement);
 		
-		// 個人成績を解析する
+		// 個人投手成績を解析する
 		List<TableRow> rows = teamPitchingData.playerStatsLinkDataTable.getRows();
 		for(TableRow row : rows) {
 			String name = row.getCell(teamPitchingData.playerStatsLinkDataTable.getColumnIndex("name")).toString();

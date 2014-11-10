@@ -11,6 +11,8 @@ public class SplitStatsInningDataTable extends DataTable {
 
 	public SplitStatsInningDataTable() {
 		
+		setCustomProperty("テーブル名", "イニング別成績");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("inning",		ValueType.TEXT,		"イニング"));

@@ -11,6 +11,8 @@ public class SplitStatsVsDataTable extends DataTable {
 
 	public SplitStatsVsDataTable() {
 		
+		setCustomProperty("テーブル名", "左右打者別成績");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("hand",	ValueType.TEXT,		""));

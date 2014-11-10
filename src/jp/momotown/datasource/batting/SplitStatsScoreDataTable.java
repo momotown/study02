@@ -12,6 +12,8 @@ public class SplitStatsScoreDataTable extends DataTable {
 	public List<SplitStatsScoreChildDataTable> childDataTables = new ArrayList<SplitStatsScoreChildDataTable>();
 
 	public SplitStatsScoreDataTable() {
+		
+		setCustomProperty("テーブル名", "得点差状況別成績");
 
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
 		
@@ -21,9 +23,16 @@ public class SplitStatsScoreDataTable extends DataTable {
 		
 		addColumns(cd);
 		
-		for(int i = 0; i < 2; ++i) {
-			childDataTables.add(new SplitStatsScoreChildDataTable());
-		}
+		
+		String nameOfParentTable = getCustomProperty("テーブル名");
+		SplitStatsScoreChildDataTable child = new SplitStatsScoreChildDataTable();
+		child.setCustomProperty("テーブル名",  nameOfParentTable + "（通算）");
+		childDataTables.add(child);
+		
+		child = new SplitStatsScoreChildDataTable();
+		child.setCustomProperty("テーブル名",  nameOfParentTable + "（得点圏）");
+		childDataTables.add(child);
+		
 		
 	}
 

@@ -11,6 +11,8 @@ public class SplitStatsPitchTypeDataTable extends DataTable {
 
 	public SplitStatsPitchTypeDataTable() {
 		
+		setCustomProperty("ƒe[ƒuƒ‹–¼", "‹…í•Ê”íˆÀ‘ÅŠ„‡");
+		
 		List<ColumnDescription> cd = new ArrayList<ColumnDescription>();
   	
 		cd.add(new ColumnDescription("type",		ValueType.TEXT,		"‹…í"));
